@@ -49,7 +49,12 @@ export async function pageSave(params) {
 //   return request(`/api/page/search?${stringify(params)}`)
 // }
 export async function findCompont() {
-  return request(`/api/page/search`)
+  return request('/api/page/search')
+}
+
+//详情
+export async function search(params) {
+  return request(`/api/details?${stringify(params)}`)
 }
 
 // 删除

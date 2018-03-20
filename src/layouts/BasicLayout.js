@@ -15,6 +15,7 @@ import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
+import  testView from '../routes/Test/testView'
 
 const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
@@ -204,6 +205,8 @@ class BasicLayout extends React.PureComponent {
                 )
               }
               <Redirect exact from="/" to={bashRedirect} />
+
+              <Route path="/task/details" component={testView} />
               <Route render={NotFound} />
             </Switch>
           </Content>
@@ -227,11 +230,12 @@ class BasicLayout extends React.PureComponent {
               }]}
               copyright={
                 <Fragment>
-                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                  Copyright <Icon type="copyright" /> 测试
                 </Fragment>
               }
             />
           </Footer>
+  
         </Layout>
       </Layout>
     );

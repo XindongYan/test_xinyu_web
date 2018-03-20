@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { fakeSubmitForm, pageSave, findCompont, pageDelete } from '../services/api';
+import { fakeSubmitForm, pageSave, findCompont, pageDelete, search } from '../services/api';
 // import { stat } from 'fs';
 
 export default {
@@ -20,11 +20,13 @@ export default {
   },
 
   effects: {
+    // 新建
     *testPage({payload, callback}, { call }) {
       console.log(payload)
       const response = yield call(pageSave, payload)
       if (callback) callback(response)
     },
+
     // 后台查询值, payload发送前台参数
     *find({payload}, {call, put}) {
       const response = yield call(findCompont, payload)
@@ -37,6 +39,7 @@ export default {
         })
       }
     },
+
     // 删除
     *delete({payload, callback}, { call }) {
       const response = yield call(pageDelete, payload)
@@ -75,6 +78,6 @@ export default {
         ...state,
         data: payload,
       }
-    }
+    },
   },
 };

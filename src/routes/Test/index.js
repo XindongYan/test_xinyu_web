@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import {
   Table, Card, Input, Select, Icon, Button, Checkbox, message, Radio, Popconfirm, DatePicker,
-  Tooltip, Divider, Form, Modal, Popover, Pagination, Tabs
+  Tooltip, Divider, Form, Modal, Popover, Pagination, Tabs, Breadcrumb
 } from 'antd';
+import { Link } from 'dva/router'
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from '../Forms/style.less';
 
@@ -53,15 +54,17 @@ export default class BasicForms extends PureComponent {
   handlDel = (record) => {
     this.props.dispatch({
       type: 'form/delete',
-      payload: {_id: record},
+      payload: { _id: record },
       callback: (response) => {
         if (response.error) {
           message.error(response.msg)
         } else {
           message.success(response.msg);
+          this.componentDidMount()
         }
-      }
+      },
     })
+    // componentDidMount()    
   }
 
   render() {
@@ -88,14 +91,6 @@ export default class BasicForms extends PureComponent {
       },
     };
 
-
-    const list = [{
-      key: '1',
-      name: 'Bob',
-      age: '32',
-      address: 'China ChanganRow 1th'
-    }]
-
     const cloumn = [{
       title: 'Title',
       dataIndex: 'title',
@@ -112,11 +107,20 @@ export default class BasicForms extends PureComponent {
       title: '操作',
       render: (record) => {
         return (
-        <Popconfirm placement="left" title={`确认删除?`} onConfirm={() => this.handlDel(record._id)} okText="确认" cancelText="取消">
-          <Tooltip placement="top" title="删除">
-            <a>删除</a>
-          </Tooltip>
-        </Popconfirm>
+          <p>
+            <Breadcrumb>
+              <Breadcrumb.Item>
+                <Link to={`/task/details?_id=${record._id}`}>详情</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Popconfirm placement="left" title={`确认删除?`} onConfirm={() => this.handlDel(record._id)} okText="确认" cancelText="取消">
+                  <Tooltip placement="top" title="删除">
+                    <a>删除</a>
+                  </Tooltip>
+                </Popconfirm>
+              </Breadcrumb.Item>
+            </Breadcrumb>
+          </p>
         )
       }
     }]
