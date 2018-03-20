@@ -20,7 +20,7 @@ const { TextArea } = Input;
 
 // @connect(({ loading }) => ({
 //   submitting: loading.effects['form/submitRegularForm'],
-  
+
 // }))
 @Form.create()
 export default class BasicForms extends PureComponent {
@@ -31,7 +31,7 @@ export default class BasicForms extends PureComponent {
       // 发送参数
       payload: {
         currentPage: 1,
-        pageSize: 10, 
+        pageSize: 5,
       }
     })
   }
@@ -39,7 +39,21 @@ export default class BasicForms extends PureComponent {
   handlSave = () => {
     this.props.dispatch({
       type: 'form/testPage',
-      payload: { title: 'hello', content: 'world !' },
+      payload: { title: this.props.form.getFieldValue('mubiao'), content: this.props.form.getFieldValue('miaoshu') },
+      callback: (response) => {
+        if (response.error) {
+          message.error(response.msg)
+        } else {
+          message.success(response.msg);
+        }
+      }
+    })
+  }
+
+  handlDel = (record) => {
+    this.props.dispatch({
+      type: 'form/delete',
+      payload: {_id: record},
       callback: (response) => {
         if (response.error) {
           message.error(response.msg)
@@ -53,7 +67,7 @@ export default class BasicForms extends PureComponent {
   render() {
     const { submitting, data } = this.props;
     console.log(data.list)
-    const { getFieldDecorator, getFieldValue } = this.props.form;
+    const { getFieldDecorator, getFieldValue, getFieldProps } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
@@ -74,6 +88,7 @@ export default class BasicForms extends PureComponent {
       },
     };
 
+
     const list = [{
       key: '1',
       name: 'Bob',
@@ -83,12 +98,27 @@ export default class BasicForms extends PureComponent {
 
     const cloumn = [{
       title: 'Title',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'title',
+      // key: '_id',
     }, {
       title: 'Content',
-      dataIndex: 'age',
-      key: 'age'
+      dataIndex: 'content',
+      // key: '_id'
+    }, {
+      title: 'Date',
+      dataIndex: 'date',
+      // key: '_id'
+    }, {
+      title: '操作',
+      render: (record) => {
+        return (
+        <Popconfirm placement="left" title={`确认删除?`} onConfirm={() => this.handlDel(record._id)} okText="确认" cancelText="取消">
+          <Tooltip placement="top" title="删除">
+            <a>删除</a>
+          </Tooltip>
+        </Popconfirm>
+        )
+      }
     }]
 
     function callback(key) {
@@ -97,24 +127,25 @@ export default class BasicForms extends PureComponent {
 
     // 删除需获取_id
     // 查看详细的时候链接需带参数
+    // Table 之后自动分页
     return (
       <div>
         <PageHeaderLayout >
           <Tabs defaultActiveKey="1" onChange={callback}>
             <TabPane tab="Tab 1" key="1">
-            <Table
-              columns={cloumn}
-              rowKey={record => record._id}
-              dataSource={data.list}
-              pagination={{
-                ...data.pagination
-              }}
-            />
+              <Table
+                columns={cloumn}
+                rowKey={record => record._id}
+                dataSource={data.list}
+              // pagination={{
+              //   ...data.pagination
+              // }}
+              />
             </TabPane>
             <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
             <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
-          
-          
+
+
           </Tabs>
           <Card bordered={false}>
             <Form
@@ -131,7 +162,7 @@ export default class BasicForms extends PureComponent {
                     required: true, message: '请输入标题',
                   }],
                 })(
-                  <Input placeholder="给目标起个名字" />
+                  <Input {...getFieldProps('mubiao')} placeholder="给目标起个名字" />
                 )}
               </FormItem>
               <FormItem
@@ -143,12 +174,12 @@ export default class BasicForms extends PureComponent {
                     required: true, message: '目标描述',
                   }],
                 })(
-                  <TextArea style={{ minHeight: 32 }} placeholder="请输入你的阶段性工作目标" rows={4} />
+                  <TextArea {...getFieldProps('miaoshu')} style={{ minHeight: 32 }} placeholder="请输入你的阶段性工作目标" rows={4} />
                 )}
               </FormItem>
 
               <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
-                <Button type="primary" htmlType="submit" loading={submitting}>
+                <Button type="primary" htmlType="submit" onClick={() => this.handlvalue()} loading={submitting}>
                   提交
               </Button>
                 <Button style={{ marginLeft: 8 }} onClick={() => this.handlSave()}>保存</Button>

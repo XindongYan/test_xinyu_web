@@ -9,7 +9,7 @@ export default {
   state: {
     data: {
       list: [],
-      pagination: {}
+      pagination: 5
     },
     step: {
       payAccount: 'ant-design@alipay.com',
@@ -21,6 +21,7 @@ export default {
 
   effects: {
     *testPage({payload, callback}, { call }) {
+      console.log(payload)
       const response = yield call(pageSave, payload)
       if (callback) callback(response)
     },
