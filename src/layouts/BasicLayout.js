@@ -13,6 +13,8 @@ import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
+import TaskChannel from '../routes/Test/TaskChannel';
+import WriterTaskCreate from '../routes/Test/TaskCreate';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 import  testView from '../routes/Test/testView'
@@ -205,7 +207,8 @@ class BasicLayout extends React.PureComponent {
                 )
               }
               <Redirect exact from="/" to={bashRedirect} />
-
+              <Route path="/writer/task/channel" component={TaskChannel} />
+              <Route path="/writer/task/create" component={WriterTaskCreate} />
               <Route path="/task/details" component={testView} />
               <Route render={NotFound} />
             </Switch>

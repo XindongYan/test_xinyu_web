@@ -89,6 +89,12 @@ export const getRouterData = (app) => {
     '/test/test': {
       component: dynamicWrapper(app, ['monitor'], () => import('../routes/Test/index'))
     },
+    '/test/create': {
+      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Test/create'))
+    },
+    '/test/crx': {
+      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Test/crx'))
+    },
 
     '/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),

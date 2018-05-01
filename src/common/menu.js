@@ -20,8 +20,14 @@ const menuData = [{
   icon: 'dashboard',
   path: 'test',
   children: [{
-    name: '新建， 查询和删除',
+    name: '查询和删除',
     path: 'test',
+  }, {
+    name: '新建',
+    path: 'create',
+  }, {
+    name: '测试淘宝登陆状态',
+    path: 'crx',
   }]
 }, {
   name: '表单页',

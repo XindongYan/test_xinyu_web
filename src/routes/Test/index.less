@@ -1,0 +1,143 @@
+.avatarUploader,
+.avatarUploaderTrigger,
+.avatar {
+  width: 150px;
+  height: 150px;
+}
+.avatarUploader {
+  display: inline-block;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.avatarUploaderTrigger {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 28px;
+  color: #999;
+}
+
+.customImageBox {
+  position: relative;
+  width: 100%; 
+  height: 150px;
+  text-align: center;
+  line-height: 146px;
+}
+.customImage{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+.customCard{
+  padding: 6px 0;
+}
+.customNodes{
+  width: 100%;
+  height: 18px;
+  line-height: 18px;
+  text-indent: 0.8em;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.customImageBox:hover .customModals,.customImageBox:hover .customAlbumModals{
+  display: flex;
+}
+.customImageBox:hover .deletePicBox{
+  display: block;
+}
+.auctionCard{
+  padding: 2px 6px;
+}
+.auctionNodes{
+  width: 100%;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.auctionImageBox{
+  position: relative;
+  width: 100%; 
+  height: 140px;
+  text-align: center;
+  line-height: 136px;
+}
+.customModals{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+}
+.customAlbumModals{
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: none;
+}
+.customIconBox{
+  flex: 1;
+  cursor: pointer;
+  color: #eee;
+}
+.customIconBox:hover{
+  color: #fff;
+}
+.customIcon{
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.fileInpBox{
+  width: 100px;
+  height: 32px;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+.fileInpBox>label{
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 32px;
+  text-align: center;
+  background: #1fbf9f;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.fileInp{
+  display: none;
+}
+.deletePicBox{
+  position: absolute;
+  right: 4px;
+  top: 2px;
+  width: 32px;
+  height: 20px;
+  line-height: 20px;
+  background: rgba(0,0,0,0.6);
+  color: #f0f0f0;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  display: none;
+}
+.deletePicBox:hover{
+  color: #fff;
+}
